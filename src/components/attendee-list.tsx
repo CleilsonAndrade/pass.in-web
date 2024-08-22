@@ -1,11 +1,24 @@
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, MoreHorizontal, Search } from "lucide-react";
+import { ChangeEvent, useState } from "react";
 import { IconButton } from "./icon-button";
 import { Table } from "./table/table";
 import { TableCell } from "./table/table-cell";
 import { TableHeader } from "./table/table-header";
 import { TableRow } from "./table/table-row";
 
+dayjs.extend(relativeTime).locale("pt-br");
+
 export function AttendeeList() {
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+
+  function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value);
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
@@ -20,7 +33,7 @@ export function AttendeeList() {
         <thead>
           <tr className="border-b border-white/10">
             <TableHeader>
-              <input type="checkbox" className="size-4 bg-black/20 rounded border border-white/10" />
+              <input onChange={onSearchInputChanged} type="checkbox" className="size-4 bg-black/20 rounded border border-white/10" />
             </TableHeader>
             <TableHeader style={{ width: 48 }}>Código</TableHeader>
             <TableHeader>Participantes</TableHeader>
@@ -41,8 +54,12 @@ export function AttendeeList() {
                 <span>cleilsonjose@hotmail.com</span>
               </div>
             </TableCell>
-            <TableCell>7 dias atrás</TableCell>
-            <TableCell>3 dias atrás</TableCell>
+            <TableCell>
+              {dayjs().to()}
+            </TableCell>
+            <TableCell>
+              {dayjs().to()}
+            </TableCell>
             <TableCell>
               <IconButton transparent>
                 <MoreHorizontal className="size-4" />
