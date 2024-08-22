@@ -7,8 +7,8 @@ export function Header() {
       <img src={logo} alt="pass.in logo" />
 
       <nav className="flex items-center gap-5">
-        <NavLink href="/eventos">Eventos</NavLink>
-        <NavLink href="participantes">Participantes</NavLink>
+        <NavLink href="/eventos" className="text-zinc-300">Eventos</NavLink>
+        <NavLink href="/participantes">Participantes</NavLink>
       </nav>
     </div>
   )
