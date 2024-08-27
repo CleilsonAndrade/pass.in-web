@@ -52,7 +52,10 @@ export function AttendeeList() {
   const totalPages = Math.ceil(total / 10)
 
   useEffect(() => {
-    const url = new URL(`/events/:id/attendees`)
+    const url = new URL(
+      `/events/${'3a9f398d-1c50-4752-a363-2099d7fa00d5'}/attendees`,
+      api.defaults.baseURL
+    )
 
     url.searchParams.set('pageIndex', String(page - 1))
 
