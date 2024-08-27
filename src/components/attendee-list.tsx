@@ -1,3 +1,4 @@
+import { api } from '@/lib/api'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -9,7 +10,7 @@ import {
   MoreHorizontal,
   Search
 } from 'lucide-react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { IconButton } from './icon-button'
 import { Table } from './table/table'
 import { TableCell } from './table/table-cell'
@@ -18,14 +19,40 @@ import { TableRow } from './table/table-row'
 
 dayjs.extend(relativeTime).locale('pt-br')
 
-export function AttendeeList() {
-  const [, setSearch] = useState('')
-  const [page, setPage] = useState(1)
+interface Attendee {
+  id: string
+  name: string
+  email: string
+  createdAt: string
+  checkedInAt: string | null
+}
 
-  const totalPages = Math.ceil(20 / 10)
+export function AttendeeList() {
+  const [attendees, setAttendees] = useState<Attendee[]>([])
+  const [page, setPage] = useState(1)
+  const [total, setTotal] = useState(0)
+  const [search, setSearch] = useState('')
+
+  const totalPages = Math.ceil(total / 10)
+
+  useEffect(() => {
+    const url = new URL(`/events/:id/attendees`)
+
+    url.searchParams.set('pageIndex', String(page - 1))
+
+    if (search.length > 0) {
+      url.searchParams.set('query', search)
+    }
+
+    api.get(url.toString()).then(response => {
+      setAttendees(response.data.attendees)
+      setTotal(response.data.total)
+    })
+  }, [page, search])
 
   function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
+    setPage(1)
   }
 
   function goToNextPage() {
@@ -51,8 +78,9 @@ export function AttendeeList() {
         <div className="w-72 px-3 py-1.5 border border-white/10 bg-transparent rounded-lg flex items-center gap-3">
           <Search className="size-4 text-emerald-300" />
           <input
+            onChange={onSearchInputChanged}
             placeholder="Buscar participantes..."
-            className="text-sm border-0 p-0 bg-transparent flex-1 outline-none"
+            className="text-sm border-0 p-0 bg-transparent flex-1 outline-none focus:ring-0"
           />
         </div>
       </div>
@@ -62,7 +90,6 @@ export function AttendeeList() {
           <tr className="border-b border-white/10">
             <TableHeader>
               <input
-                onChange={onSearchInputChanged}
                 type="checkbox"
                 className="size-4 bg-black/20 rounded border border-white/10"
               />
@@ -75,35 +102,45 @@ export function AttendeeList() {
           </tr>
         </thead>
         <tbody>
-          <TableRow>
-            <TableCell>
-              <input
-                type="checkbox"
-                className="size-4 bg-black/20 rounded border border-white/10"
-              />
-            </TableCell>
-            <TableCell>12343</TableCell>
-            <TableCell>
-              <div className="flex flex-col gap-1">
-                <span className="font-semibold text-white">
-                  Cleilson Andrade
-                </span>
-                <span>cleilsonjose@hotmail.com</span>
-              </div>
-            </TableCell>
-            <TableCell>{/* {dayjs().to()} */}</TableCell>
-            <TableCell>{/* {dayjs().to()} */}</TableCell>
-            <TableCell>
-              <IconButton transparent>
-                <MoreHorizontal className="size-4" />
-              </IconButton>
-            </TableCell>
-          </TableRow>
+          {attendees.map(attendee => {
+            return (
+              <TableRow key={attendee.id}>
+                <TableCell>
+                  <input
+                    type="checkbox"
+                    className="size-4 bg-black/20 rounded border border-white/10"
+                  />
+                </TableCell>
+                <TableCell>{attendee.id}</TableCell>
+                <TableCell>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-semibold text-white">
+                      {attendee.name}
+                    </span>
+                    <span>{attendee.email}</span>
+                  </div>
+                </TableCell>
+                <TableCell>{dayjs().to(attendee.createdAt)}</TableCell>
+                <TableCell>
+                  {attendee.checkedInAt == null ? (
+                    <span className="text-zinc-400">Não fez check-in</span>
+                  ) : (
+                    dayjs().to(attendee.checkedInAt)
+                  )}
+                </TableCell>
+                <TableCell>
+                  <IconButton transparent>
+                    <MoreHorizontal className="size-4" />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </tbody>
         <tfoot>
           <tr>
             <TableCell colSpan={3}>
-              Mostrando 10 de {totalPages} itens
+              Mostrando {attendees.length} de {total} itens
             </TableCell>
             <TableCell colSpan={3} className="text-right">
               <div className="inline-flex items-center gap-8">
