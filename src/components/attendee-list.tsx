@@ -65,7 +65,7 @@ export function AttendeeList() {
 
     api.get(url.toString()).then(response => {
       setAttendees(response.data.attendees)
-      setTotal(response.data.total)
+      setTotal(response.data.totalItems)
     })
   }, [page, search])
 
