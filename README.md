@@ -17,7 +17,7 @@
 * [Licença](#licença)
 
 # 📃 <span id="descrição">Descrição</span>
-O pass.in Web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.Desenvolvida utilizando superset [**TypeScript**](https://www.typescriptlang.org/), com a biblioteca [**React**](https://react.dev/) para web, [**Vite**](https://vitejs.dev/) para o desenvolvimento e o framework CSS [**tailwindcss**](https://tailwindcss.com/) para um layout responsivo e padronizado.
+O pass.in Web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento. Desenvolvida utilizando superset [**TypeScript**](https://www.typescriptlang.org/), com a biblioteca [**React**](https://react.dev/) para web, [**Vite**](https://vitejs.dev/) para o desenvolvimento e o framework CSS [**tailwindcss**](https://tailwindcss.com/) para um layout responsivo e padronizado.
 
 # 📌 <span id="requisitos">Requisitos Funcionais</span>
 - [x] O organizador deve poder visualizar dados de um evento<br>
