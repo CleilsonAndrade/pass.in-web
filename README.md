@@ -1,6 +1,6 @@
 <div align="center">
-    <h1 align="center">plann.er$</h1>
-    <p>plann.er é um aplicação para montar planos de viagem com amigos, registrar atividades e links úteis. Utilizando tecnologias como React, Vite e TypeScript, sendo um client web.</p>
+    <h1 align="center">pass.in-web</h1>
+    <p>O pass.in Web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.</p>
     <img src="./design/desktop.png" alt="Logo" width="800">
 </div>
 
@@ -17,17 +17,14 @@
 * [Licença](#licença)
 
 # 📃 <span id="descrição">Descrição</span>
-Aplicação desenvolvida com fins de montar planos de viagem com amigos, registrar atividades e links úteis. Trabalhando com datas, conceitos de estado e imutabilidade, componentização e requisição a API externa.
+O pass.in Web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.Desenvolvida utilizando superset [**TypeScript**](https://www.typescriptlang.org/), com a biblioteca [**React**](https://react.dev/) para web, [**Vite**](https://vitejs.dev/) para o desenvolvimento e o framework CSS [**tailwindcss**](https://tailwindcss.com/) para um layout responsivo e padronizado.
 
 # 📌 <span id="requisitos">Requisitos Funcionais</span>
-- [x] Validação de local e data<br>
-- [x] Cadastro de convidados via e-mail<br>
-- [x] Cadastro do nome e-mail do organizador<br>
-- [x] Cadastro de atividades com horário e data dentro das datas definidas e exibição<br>
-- [x] Cadastro de links importantes e exibição<br>
-- [x] Exibição de convidados identificando os confirmados e nao confirmados<br>
+- [x] O organizador deve poder visualizar dados de um evento<br>
+- [x] O organizador deve poder visualizar a lista de participantes<br>
 
 ## Features
+- [x] Buscar participante por nome<br>
 - [x] Requisição a API<br>
 - [x] Responsividade<br>
 
@@ -38,11 +35,11 @@ Aplicação desenvolvida com fins de montar planos de viagem com amigos, registr
 - **TypeScript**
 - **Vite**
 - **ReactJS**
-- **React Router DOM**
-- **React DayPicker**
-- **tailwind**
-- **tailwind-variants**
-- **date-fns**
+- **axios**
+- **tailwindcss**
+- **tailwind-merge**
+- **dayjs**
+- **lucide-react**
 
 # 🎨 <span id="design">Design</span>
 - O modelo final para versão desktop e mobile está disponível na pasta `./design`
@@ -54,7 +51,7 @@ Aplicação desenvolvida com fins de montar planos de viagem com amigos, registr
   * #FAFAFA<br>
 
 - <span id="fontes">Fontes<br></span>
-  * Inter, sans-serif
+  * Arial, Segoe UI, sans-serif
 
 - <span id="ícones">Ícones<br></span>
   * Lucide React
@@ -62,8 +59,8 @@ Aplicação desenvolvida com fins de montar planos de viagem com amigos, registr
 # 🚀 <span id="instalação">Instalação</span>
 ```bash
   # Clone este repositório:
-  $ git clone https://github.com/CleilsonAndrade/plann.er.git
-  $ cd ./plann.er
+  $ git clone https://github.com/CleilsonAndrade/pass.in-web.git
+  $ cd ./pass.in-web
 
   # Instalar as dependências:
   $ yarn install
