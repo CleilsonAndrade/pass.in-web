@@ -39,7 +39,15 @@ export function AttendeeList() {
     return 1
   })
   const [total, setTotal] = useState(0)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(() => {
+    const url = new URL(window.location.toString())
+
+    if (url.searchParams.has('search')) {
+      return url.searchParams.get('search') ?? ''
+    }
+
+    return ''
+  })
 
   const totalPages = Math.ceil(total / 10)
 
@@ -58,8 +66,16 @@ export function AttendeeList() {
     })
   }, [page, search])
 
+  function setCurrentSearch(search: string) {
+    const url = new URL(window.location.toString())
+    url.searchParams.set('search', search)
+    window.history.pushState({}, '', url)
+
+    setSearch(search)
+  }
+
   function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
-    setSearch(event.target.value)
+    setCurrentSearch(event.target.value)
     setCurrentPage(1)
   }
 
@@ -95,6 +111,7 @@ export function AttendeeList() {
           <Search className="size-4 text-emerald-300" />
           <input
             onChange={onSearchInputChanged}
+            value={search}
             placeholder="Buscar participantes..."
             className="text-sm border-0 p-0 bg-transparent flex-1 outline-none focus:ring-0"
           />
