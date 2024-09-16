@@ -1,6 +1,6 @@
 <div align="center">
     <h1 align="center">pass.in-web</h1>
-    <p>O pass.in Web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.</p>
+    <p>O pass.in-web é o cliente web da API pass.in-api é uma aplicação de gestão de participantes em eventos presenciais sendo o. A ferramenta permite que o organizador cadastre um evento e abra uma página pública de inscrição. Os participantes inscritos podem emitir uma credencial para check-in no dia do evento.</p>
     <img src="./design/desktop.png" alt="Logo" width="800">
 </div>
 
